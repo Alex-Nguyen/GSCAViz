@@ -1,0 +1,896 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Generalized Structured Component Analysis - Visualization tool</title>
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+    <link rel="stylesheet" href="css/font-awesome.min.css">
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/dataTables.bootstrap4.css">
+    <link rel="stylesheet" href="css/ionicons.min.css">
+    <link rel="stylesheet" href="css/AdminLTE.min.css">
+    <link rel="stylesheet" href="css/skins/_all-skins.min.css">
+    <link rel="stylesheet"
+          href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
+</head>
+<body class="skin-blue layout-top-nav">
+<div class="wrapper">
+    <header class="main-header">
+        <nav class="navbar navbar-static-top">
+            <div class="container">
+                <div class="navbar-header">
+                    <a href="index.html" class="navbar-brand"><b>GSCA</b>Viz</a>
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
+                            data-target="#navbar-collapse">
+                        <i class="fa fa-bars"></i>
+                    </button>
+                </div>
+
+                <!-- Collect the nav links, forms, and other content for toggling -->
+                <div class="collapse navbar-collapse pull-left" id="navbar-collapse">
+                    <ul class="nav navbar-nav">
+                        <li class="active"><a href="#">Step 1: Data Prep <span class="sr-only">(current)</span></a></li>
+                        <li><a href="#">Step 2: Model Specs</a></li>
+                        <li><a href="#">Step 3: Parameter Estimation</a></li>
+                        <li><a href="#">Step 4: Model Evaluation</a></li>
+
+                    </ul>
+                    <form class="navbar-form navbar-left" role="search">
+                        <div class="form-group">
+                            <input type="text" class="form-control" id="navbar-search-input" placeholder="Search">
+                        </div>
+                    </form>
+                </div>
+                <!-- /.navbar-collapse -->
+                <!-- Navbar Right Menu -->
+                <div class="navbar-custom-menu">
+                    <ul class="nav navbar-nav">
+                        <!-- Messages: style can be found in dropdown.less-->
+                        <li class="dropdown messages-menu">
+                            <!-- Menu toggle button -->
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                <i class="fa fa-envelope-o"></i>
+                                <span class="label label-success">4</span>
+                            </a>
+
+                        </li>
+                        <!-- /.messages-menu -->
+
+                        <!-- Notifications Menu -->
+                        <li class="dropdown notifications-menu">
+                            <!-- Menu toggle button -->
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                <i class="fa fa-bell-o"></i>
+                                <span class="label label-warning">10</span>
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li class="header">You have 10 notifications</li>
+                                <li>
+                                    <!-- Inner Menu: contains the notifications -->
+                                    <ul class="menu">
+                                        <li><!-- start notification -->
+                                            <a href="#">
+                                                <i class="fa fa-users text-aqua"></i> 5 new members joined today
+                                            </a>
+                                        </li>
+                                        <!-- end notification -->
+                                    </ul>
+                                </li>
+                                <li class="footer"><a href="#">View all</a></li>
+                            </ul>
+                        </li>
+                        <!-- Tasks Menu -->
+                        <li class="dropdown tasks-menu">
+                            <!-- Menu Toggle Button -->
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                <i class="fa fa-flag-o"></i>
+                                <span class="label label-danger">9</span>
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li class="header">You have 9 tasks</li>
+                                <li>
+                                    <!-- Inner menu: contains the tasks -->
+                                    <ul class="menu">
+                                        <li><!-- Task item -->
+                                            <a href="#">
+                                                <!-- Task title and progress text -->
+                                                <h3>
+                                                    Design some buttons
+                                                    <small class="pull-right">20%</small>
+                                                </h3>
+                                                <!-- The progress bar -->
+                                                <div class="progress xs">
+                                                    <!-- Change the css width attribute to simulate progress -->
+                                                    <div class="progress-bar progress-bar-aqua" style="width: 20%"
+                                                         role="progressbar" aria-valuenow="20" aria-valuemin="0"
+                                                         aria-valuemax="100">
+                                                        <span class="sr-only">20% Complete</span>
+                                                    </div>
+                                                </div>
+                                            </a>
+                                        </li>
+                                        <!-- end task item -->
+                                    </ul>
+                                </li>
+                                <li class="footer">
+                                    <a href="#">View all tasks</a>
+                                </li>
+                            </ul>
+                        </li>
+                        <!-- User Account Menu -->
+                        <li class="dropdown user user-menu">
+
+                            <ul class="dropdown-menu">
+
+                                <!-- Menu Body -->
+                                <li class="user-body">
+                                    <div class="row">
+                                        <div class="col-xs-4 text-center">
+                                            <a href="#">Followers</a>
+                                        </div>
+                                        <div class="col-xs-4 text-center">
+                                            <a href="#">Sales</a>
+                                        </div>
+                                        <div class="col-xs-4 text-center">
+                                            <a href="#">Friends</a>
+                                        </div>
+                                    </div>
+                                    <!-- /.row -->
+                                </li>
+                                <!-- Menu Footer-->
+                                <li class="user-footer">
+                                    <div class="pull-left">
+                                        <a href="#" class="btn btn-default btn-flat">Profile</a>
+                                    </div>
+                                    <div class="pull-right">
+                                        <a href="#" class="btn btn-default btn-flat">Sign out</a>
+                                    </div>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+                <!-- /.navbar-custom-menu -->
+            </div>
+            <!-- /.container-fluid -->
+        </nav>
+    </header>
+    <!-- Full Width Column -->
+    <div class="content-wrapper">
+        <div class="container">
+            <!-- Content Header (Page header) -->
+            <section class="content-header">
+                <h1>
+                    Generalized Structured Component Analysis
+                    <small>Version 1.0</small>
+                </h1>
+                <ol class="breadcrumb">
+                    <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
+                    <li><a href="#">Layout</a></li>
+                    <li class="active">Top Navigation</li>
+                </ol>
+            </section>
+
+            <!-- Main content -->
+            <section class="content">
+                <div class="row" id="dataPreps">
+                    <div class="col-12">
+                        <div class="box box-info">
+                            <div class="box-header with-border">
+                                <h3 class="box-title">Data Preperation</h3>
+                                <div class="box-tools pull-right">
+                                    <button type="button" class="btn btn-box-tool" data-widget="collapse"><i
+                                            class="fa fa-minus"></i>
+                                    </button>
+                                    <div class="btn-group">
+                                        <button type="button" class="btn btn-box-tool dropdown-toggle"
+                                                data-toggle="dropdown">
+                                            <i class="fa fa-wrench"></i></button>
+                                        <ul class="dropdown-menu" role="menu">
+                                            <li><a href="#">Action</a></li>
+                                            <li><a href="#">Another action</a></li>
+                                            <li><a href="#">Something else here</a></li>
+                                            <li class="divider"></li>
+                                            <li><a href="#">Separated link</a></li>
+                                        </ul>
+                                    </div>
+                                    <button type="button" class="btn btn-box-tool" data-widget="remove"><i
+                                            class="fa fa-times"></i></button>
+                                </div>
+                            </div>
+                            <div class="box-body">
+                                <div class="form-group">
+                                    <label for="uploader">File input</label>
+                                    <input type="file" id="uploader">
+
+                                    <p class="help-block">Please upload your csv file here.</p>
+                                </div>
+                                <div class="progress">
+                                    <div class="progress-bar progress-bar-primary progress-bar-striped"
+                                         role="progressbar" id="progressPrep" aria-valuenow="40" aria-valuemin="0"
+                                         aria-valuemax="100" style="width: 40%">
+                                        <span class="sr-only">40% Complete (success)</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="box box-info">
+                        <div class="box-header with-border">
+                            <h3 class="box-title">Data Sample</h3>
+                            <div class="box-tools pull-right">
+                                <button type="button" class="btn btn-box-tool" data-widget="collapse"><i
+                                        class="fa fa-minus"></i>
+                                </button>
+                                <div class="btn-group">
+                                    <button type="button" class="btn btn-box-tool dropdown-toggle"
+                                            data-toggle="dropdown">
+                                        <i class="fa fa-wrench"></i></button>
+                                    <ul class="dropdown-menu" role="menu">
+                                        <li><a href="#">Action</a></li>
+                                        <li><a href="#">Another action</a></li>
+                                        <li><a href="#">Something else here</a></li>
+                                        <li class="divider"></li>
+                                        <li><a href="#">Separated link</a></li>
+                                    </ul>
+                                </div>
+                                <button type="button" class="btn btn-box-tool" data-widget="remove"><i
+                                        class="fa fa-times"></i></button>
+                            </div>
+                        </div>
+                        <div class="box-body">
+                            <div class="col-md-12" style="overflow: auto" id="tbl_container">
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+                <!-- /.box -->
+
+                <!--                Model specifications-->
+                <div class="row">
+                    <div class="box box-info">
+                        <div class="box-header with-border">
+                            <h3 class="box-title">Model specification</h3>
+                            <div class="box-tools pull-right">
+                                <button type="button" class="btn btn-box-tool" data-widget="collapse"><i
+                                        class="fa fa-minus"></i>
+                                </button>
+                                <div class="btn-group">
+                                    <button type="button" class="btn btn-box-tool dropdown-toggle"
+                                            data-toggle="dropdown">
+                                        <i class="fa fa-wrench"></i></button>
+                                    <ul class="dropdown-menu" role="menu">
+                                        <li><a href="#">Action</a></li>
+                                        <li><a href="#">Another action</a></li>
+                                        <li><a href="#">Something else here</a></li>
+                                        <li class="divider"></li>
+                                        <li><a href="#">Separated link</a></li>
+                                    </ul>
+                                </div>
+                                <button type="button" class="btn btn-box-tool" data-widget="remove"><i
+                                        class="fa fa-times"></i></button>
+                            </div>
+                        </div>
+                        <div class="box-body">
+                            <div class="col-md-6" style="overflow: auto">
+                                <div class="form-group">
+                                    <label for="myModel">Input your model:</label>
+                                    <textarea class="form-control" rows="15" id="myModel"></textarea>
+                                </div>
+                                <div>
+                                    <button type="button" class="btn btn-warning" id="btnAnalyzeModel">Analyze the model</button>
+                                </div>
+                            </div>
+                            <div class="col-md-6" style="overflow: auto">
+                                <div class="box box-info">
+                                    <div class="box-header">
+                                        <h3 class="box-title">Examples</h3>
+                                        <div class="box-tools pull-right">
+                                            <button type="button" id="clipboardCopy" class="btn btn-box-tool"><i
+                                                    class="fa fa-clipboard"></i>
+                                            </button>
+                                        </div>
+                                    </div>
+
+                                    <div class="box-body" id="sampleModel">
+                                        <p class="text-success"># Measurement model</p>
+                                        <p>OP =~ cei1 + cei2 + cei3</p>
+                                        <p> OI =~ ma1 + ma2 + ma3</p>
+                                        <p>AC_J =~ orgcmt1 + orgcmt2 + orgcmt3</p>
+                                        <p>AC_L =~ orgcmt5 + orgcmt6 + orgcmt8</p>
+                                        <p class="text-success"># Structural model</p>
+                                        <p>OI ~ OP</p>
+                                        <p>AC_J ~ OI</p>
+                                        <p>AC_L ~ OI</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </section>
+            <!-- /.content -->
+        </div>
+        <!-- /.container -->
+    </div>
+    <!-- /.content-wrapper -->
+    <footer class="main-footer">
+        <div class="container">
+            <div class="pull-right hidden-xs">
+                <b>Version</b> 2.4.13
+            </div>
+            <strong>Copyright &copy; 2014-2019 <a href="https://adminlte.io">AdminLTE</a>.</strong> All rights
+            reserved.
+        </div>
+        <!-- /.container -->
+    </footer>
+</div>
+<!-- ./wrapper -->
+
+</body>
+<script src="js/jquery.min.js"></script>
+<script src="js/bootstrap.min.js"></script>
+<script src="js/jquery.slimscroll.min.js"></script>
+<script src="js/jquery.dataTables.js"></script>
+<script src="js/dataTables.bootstrap4.js"></script>
+<script src="js/fastclick.js"></script>
+<script src="js/adminlte.min.js"></script>
+<script src="js/underscore-min.js"></script>
+<script src="js/jstat.min.js"></script>
+<script src="https://d3js.org/d3.v3.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjs/7.1.0/math.min.js"></script>
+<script>
+
+    class DataTablePrep {
+        constructor() {
+            this.jsonData = {};
+            this.table ="";
+            this.result ={};
+            this.debug = false;
+        }
+        init(json){
+            this.jsonData = json;
+            return this;
+        }
+        create2DarrayOfValue (row, col, val) {
+            let arr = [];
+            if(row===1){
+                for (let j = 0; j < col; j++) {
+                    arr.push(val)
+                }
+            }else{
+                for (let i = 0; i < row; i++) {
+                    let _row = [];
+                    for (let j = 0; j < col; j++) {
+                        _row.push(val)
+                    }
+                    arr.push(_row)
+                }
+            }
+
+            return arr;
+        }
+        parseData(model){
+            let data = this.jsonData;
+            let result ={};
+            let temp ={};
+            let colnames = Object.keys(data[0]);
+            let splitLines = model.split('\n');
+            for(let t=0;t <splitLines.length; t++){
+                if(splitLines[t].startsWith("#") || splitLines[t].length ===0){
+                    //First remove data
+                    if(this.debug){
+                        console.log(`Comment removed: ${splitLines[t]}`)
+                    }
+                    splitLines.splice(t,1);
+                    t--;
+                }
+            }
+            temp.measurement ={};
+            for(let t=0; t<splitLines.length;t++){
+                if(splitLines[t].indexOf("=~")>=0){
+                    let sp = splitLines[t].split("=~");
+                    if(temp.measurement.hasOwnProperty(sp[0])){
+                        console.log(`Duplicate latent variable ${sp[0]}`)
+                    }else{
+                        temp.measurement[sp[0]] = sp[1];
+                        splitLines.splice(t,1);
+                        t--;
+                    }
+                }
+            }
+
+
+            //Extract latent variable
+            temp.latent = Object.keys(temp.measurement);
+            temp.indicators =[];
+            //Extract indicator
+
+            temp.latent.forEach(key=>{
+                let _indicators =  temp.measurement[key].split("+");
+                temp.indicators = _.union(temp.indicators, _indicators)
+            });
+            //Check if indicators do not match columns name
+            let indicatorUnmatch = _.difference(temp.indicators, colnames);
+            if(indicatorUnmatch.length >0){
+                if(this.debug){
+                    console.log(`Indicators does not match in data ${indicatorUnmatch.join(", ")}`)
+                }
+            }
+            result.W00 = this.create2DarrayOfValue(temp.indicators.length, temp.latent.length,0);
+            //Update values in W00
+            temp.latent.forEach((value,index)=>{
+                let _indicators =  temp.measurement[value].split("+");
+                _indicators.forEach((val2)=>{
+                    let rowIndex = temp.indicators.indexOf(val2);
+                    result.W00[rowIndex][index] =99;
+                })
+            });
+
+            result.C00 = math.transpose(result.W00);
+
+
+            //Construct B00
+            temp.structuralmodel ={};
+            for(let t=0; t<splitLines.length;t++){
+                if(splitLines[t].indexOf("~")>=0){
+                    let sp = splitLines[t].split("~");
+                    if(temp.structuralmodel.hasOwnProperty(sp[0])){
+                        console.log(`Duplicate latent variable ${sp[0]}`)
+                    }else{
+                        temp.structuralmodel[sp[0]] = sp[1];
+                        splitLines.splice(t,1);
+                        t--;
+                    }
+                }
+            }
+            result.B00 = this.create2DarrayOfValue(temp.latent.length, temp.latent.length,0);
+            for(let key of Object.keys(temp.structuralmodel)){
+                let c = temp.latent.indexOf(key);
+                let r = temp.latent.indexOf(temp.structuralmodel[key]);
+                result.B00[r][c]=99;
+            }
+
+            //Process return data
+            result.data = this.create2DarrayOfValue(data.length, temp.indicators.length,0);
+            data.forEach(function (d,i) {
+                temp.indicators.forEach((val,id)=>{
+                    result.data[i][id] = +d[val];
+                })
+            });
+            result.latent = temp.latent;
+            result.indicators = temp.indicators;
+            this.result = result;
+            return this;
+        }
+        populateData(){
+            // Reset table
+            $('#tbl_container').empty();
+
+            // Extract column names
+            let colNames = Object.keys(this.jsonData[0]);
+            let cols ="";
+            // Populate cols
+            colNames.forEach(col=>{
+                cols += "<th class='sorting_asc' tabindex='0' aria-controls='table_content' rowspan='1' colspan='1' aria-sort='ascending'>" + col + "</th>";
+            })
+
+            let tblheader = "<thead><tr role='row'>" + cols + "</tr></thead>";
+            let tblrows = "";
+            const _sliceLenght = this.jsonData.length < 1000 ? this.jsonData.length : 1000;
+            let subsetData = this.jsonData.slice(0, _sliceLenght);
+            subsetData.forEach((row, index) => {
+                let _col = ``;
+                for (let key in row) {
+                    _col += `<td>${row[key]}</td>`
+                }
+
+
+                let _class = index % 2 === 0 ? "even" : "odd";
+                tblrows += `<tr role='row' class=${_class}>${_col}</tr>`;
+
+            });
+            this.table = "<table id='table_content' class='table table-bordered table-striped dataTable overflow-auto' role='grid'>" + tblheader + tblrows + "</table>";
+            return this;
+        }
+        display(){
+            $('#tbl_container').append(this.table);
+            $("#table_content").DataTable();
+        }
+    }
+    class GESCA{
+        constructor(){
+            this.z0 = null;
+            this.W00 = null;
+            this.C00 = null;
+            this.B00 = null;
+            this.nbt = 100;
+            this.itmax = 100;
+            this.ceps = 0.00001;
+            this.moption = 0;
+            this.missingvalue = null;
+            this.output ={};
+        }
+        // params = z0, group_var, W00, C00, B00,
+        //                      loadtype = matrix(1,1,ncol(W00)), nbt = 100, itmax = 100,
+        //                      ceps = 0.00001, moption = 0, missingvalue = NULL
+        init(params){
+            this.z0 = params.z0;
+            this.W00 = params.W00;
+            this.C00 = params.C00;
+            this.B00 = params.B00;
+            this.loadtype = params.loadtype;
+            this.nbt = params.nbt;
+            this.itmax = params.itmax;
+            this.ceps = params.ceps;
+            this.moption = params.moption;
+            this.missingvalue = params.missingvalue;
+            this.group_var =params.group_var;
+            console.log(this);
+            return this;
+        }
+        modelAnalyzer(){
+            // Missing values
+            // if(this.moption===1){
+            //process missing values
+            // }
+            let dimensions = jStat(this.z0).dimensions();
+            let number_of_observations = dimensions.rows;
+            let number_of_variables = dimensions.cols;
+            let number_of_groups = 1;//Fix later
+            let number_of_observation_per_group = this.create1Darray(number_of_groups,0);
+            for(let g=0;g<number_of_groups;g++){
+                number_of_observation_per_group[g] = number_of_observations;
+            }
+
+            let case_index = jStat.zeros(number_of_groups,2);
+            let _from = -1;
+            for(let ng=0; ng<number_of_groups; ng++){
+                let _start = _from + 1;
+                let _end = _from + number_of_observation_per_group[ng];
+                case_index[ng][0] = _start;
+                case_index[ng][1] = _end;
+            }
+            //
+            let number_of_latent_vars = this.loadtype.length;
+            let total_vars_latent = number_of_latent_vars + number_of_variables;
+            // //We skip reflective
+            //
+            let A00 = math.concat(this.C00, this.B00);
+            // console.log(A00)
+            let _I = math.identity(number_of_variables)._data;
+            let V00 = math.concat(_I,this.W00);
+            let Wi = JSON.parse(JSON.stringify(this.W00));
+            let Ai = JSON.parse(JSON.stringify(A00));
+            //
+            // //Calculate index
+            let windex0=[];
+            let aindex0 =[];
+            let _W00 = math.flatten(math.transpose(this.W00));
+            _W00.forEach((_d, _i)=>{
+                if(_d===99){
+                    windex0.push(_i);
+                }
+            })
+            let _A00 = math.flatten(math.transpose(A00));
+            _A00.forEach((_d, _i)=>{
+                if(_d===99){
+                    aindex0.push(_i);
+                }
+            })
+            // //End of index calculation
+            //
+
+            let W0 = jStat.zeros(number_of_groups*number_of_variables, number_of_groups*number_of_latent_vars);
+            let A0 = jStat.zeros(number_of_groups*number_of_latent_vars,total_vars_latent);
+            let V0 = jStat.zeros(number_of_groups*number_of_variables,number_of_groups*total_vars_latent);
+            //
+            let W = JSON.parse(JSON.stringify(W0));
+            let A = JSON.parse(JSON.stringify(A0));
+            let V = JSON.parse(JSON.stringify(V0));
+            let kk =-1, ss =-1, ll=-1;
+            for(let j=0; j<number_of_groups;j++){
+                let k = kk+1;
+                kk +=number_of_variables;
+                let s = ss +1;
+                ss += number_of_latent_vars;
+                let l = ll + 1;
+                ll += total_vars_latent;
+
+                W0 = this.cloneArray(this.W00, W0, k,s);
+                windex0.forEach(d=>{
+                    let r = d%number_of_variables;
+                    let c = math.floor(d/number_of_variables);
+                    Wi[r][c]= math.random();
+                })
+                W0 = this.cloneArray(Wi, W0, k,s);
+                A0 = this.cloneArray(A00,A0,s,0);
+
+                aindex0.forEach(d=>{
+                    let r = d%jStat(A).dimensions().rows;
+                    let c = math.floor(d/jStat(A).dimensions().rows);
+                    Ai[r][c] = math.random();
+                })
+
+                console.log("Done...")
+                A = this.cloneArray(Ai, A,s,0);
+                V0 = this.cloneArray(V00,V0,k,l);
+                let I = jStat.identity(number_of_variables);
+                let _WI = math.concat(I,Wi);
+                V = this.cloneArray(_WI,V,k,l);
+                console.log("Phew...")
+            }
+            let I = jStat.zeros(total_vars_latent*number_of_groups, total_vars_latent);
+            kk = -1;
+            for(let g=0;g<number_of_groups;g++){
+                let k = kk+1;
+                kk +=total_vars_latent;
+                let _I = jStat.identity(total_vars_latent);
+                I = this.cloneArray(_I,I,k,0);
+
+            }
+            let constrainmatrix = this.generateConstraintMatrix(A0);
+            let PHT = constrainmatrix.PHT;
+            let num_nzct = constrainmatrix.num_nzct;
+            let num_const = constrainmatrix.num_const;
+
+            // Start Bootstrap
+            let num_nnz_W00 = math.flatten(this.W00).filter(d=>d!==0).length;
+            let num_nnz_C00 = math.flatten(this.C00).filter(d=>d!==0).length;
+            let num_nnz_B00 = math.flatten(this.B00).filter(d=>d!==0).length;
+
+            let vec_FIT = jStat.zeros(this.nbt,1);
+            let vec_FIT_m = jStat.zeros(this.nbt,1);
+            let vec_FIT_s = jStat.zeros(this.nbt,1);
+            let vec_AFIT = jStat.zeros(this.nbt,1);
+            let vec_GFI = jStat.zeros(this.nbt,1);
+            let vec_SRMR = jStat.zeros(this.nbt,1);
+
+            let MatW = jStat.zeros(this.nbt,num_nnz_W00*number_of_groups);
+            let Matload = jStat.zeros(this.nbt,num_nnz_C00*number_of_groups);
+            let Matbeta = jStat.zeros(this.nbt,num_nnz_B00*number_of_groups);
+            let Matsmc = jStat.zeros(this.nbt,num_nnz_C00*number_of_groups);
+            let MatcorF = jStat.zeros(this.nbt,Math.pow(number_of_latent_vars,2)*number_of_groups);
+
+            let MatTE_S = [];
+            let MatID_S = [];
+            let MatTE_M =[];
+            let MatID_M = [];
+            let Z;
+
+            for(let b =0; b<this.nbt; b++){
+                if(b===0){
+                    if(this.moption >1){
+
+                    }else{
+                        this.output.bootsample = this.bootsample(this.z0, case_index, number_of_variables, number_of_observation_per_group, number_of_groups, b, number_of_observations);
+                        Z = this.output.bootsample.Z;
+                    }
+                }else{
+                    this.output.bootsample = this.bootsample(this.z0, case_index, number_of_variables, number_of_observation_per_group, number_of_groups, b, number_of_observations);
+                    Z = this.output.bootsample.Z;
+                }
+
+                if(b===0){
+                    if(this.moption===3){}
+                    else {
+                        this.output.RESULT = this.alternativeLeastSquareAlgorithm(Z,W0,A0,W,A,V,I,PHT,number_of_variables, number_of_latent_vars, number_of_groups, this.itmax, this.ceps);
+                    }
+                }
+            }
+            console.log(Z)
+            console.log("I should be copied")
+
+        }
+        alternativeLeastSquareAlgorithm(Z, W0, A0, W, A, V, I, PHT, nvar, nlv, ng, itmax, ceps){
+            let Psi, Gamma, f, it, imp;
+            let sizea = jStat(A).dimensions();
+            let _A0 = math.flatten(A0);
+            let aindex0=[];
+            _A0.forEach((d,i)=>{
+                if(d>=1) aindex0.push(i);
+            })
+            Psi = math.multiply(Z, math.multiply(V,I));
+            Gamma = math.multiply(Z,W);
+            it =0;
+            imp = 100000;
+            let f0 = math.pow(10,10);
+
+            while (it <=itmax && imp > ceps){
+                it +=1;
+                for(let t =0; t< sizea.cols; t++){
+                    let H1 = jStat.identity(sizea.cols);
+                    H1[t][t] = 0;
+                    let tempA0 =math.flatten(jStat.col(A0,t));
+                    let aindex =[];
+                    tempA0.forEach((d,i)=>{
+                        if(d>=1){aindex.push(i)}
+                    })
+
+                    let a = jStat.col(A,t);
+                    aindex.forEach(d=>{
+                        a[d][0] =0;
+                    })
+                    let e = jStat.zeros(1,sizea.cols);
+                    e[0][t] =1;
+                    let Y = math.subtract(Psi, math.multiply(Gamma, math.add(math.multiply(A,H1),math.multiply(a,e))));
+                    let X = jStat.col(Gamma,aindex);
+                    let X0X = math.multiply(math.transpose(X),X);
+                    let X0Y = math.multiply(math.transpose(X),Y);
+                    let XOYe = math.multiply(X0Y,math.transpose(e));
+                    aindex.forEach(val=>{
+                        A[val][t] = X0X/XOYe;
+                    })
+
+                    console.log(A)
+                }
+            }
+            return {W,A,Psi,Gamma,f,it,imp}
+        }
+        extractFromArray(data, from, to){
+            let ret = [];
+            for(let i=from;i<=to;i++){
+                ret.push(data[i]);
+            }
+            return ret;
+        }
+        bootsample(z0, case_index, number_of_variables, number_of_observation_per_group, number_of_groups, b, number_of_observations){
+            let Z = jStat.zeros(number_of_observations, number_of_groups*number_of_variables);
+            let bz01;
+            let kk = -1;
+            for(let g =0; g<number_of_groups;g++){
+                let k = kk + 1;
+                kk += number_of_variables;
+                if(b===0){
+                    bz01 = this.extractFromArray(z0,case_index[g][0], case_index[g][1])
+                }else{
+
+                }
+                let _z0mean = [jStat(z0).mean()];
+                let _identity =jStat.ones(number_of_observation_per_group[g],1);
+                let _product = math.multiply(_identity,_z0mean);
+                let ctz = math.subtract(bz01,_product);
+                let covz =math.divide(math.multiply(math.transpose(ctz),ctz),number_of_observation_per_group[g]);
+                let Dstz = math.sqrt(math.diag(math.diag(covz)));
+                let bz0 = math.divide(ctz,Dstz);
+                bz0 = math.divide(bz0, math.sqrt(number_of_observation_per_group[g]));
+                Z = this.cloneArray(bz0,Z,case_index[g][0],k);
+                // bz0 = bz0/sqrt(nobs_g(g));              % data normalization
+                // Z(case_index(g,1):case_index(g,2),k:kk) = bz0;
+                console.log(_product)
+
+            }
+            return {Z};
+        }
+        cloneArray(source, target, Rstart, Cstart){
+            let dim = jStat(source).dimensions();
+            let rows = dim.rows, cols = dim.cols;
+            for(let i=0; i<rows;i++){
+                for (let j=0;j<cols;j++){
+                    let val = source[i][j];
+                    target[i+Rstart][j+Cstart] = val;
+                }
+            }
+            return target;
+        }
+        create1Darray(num, val){
+            let ret = [];
+            for(let i=0;i<num;i++){
+                ret.push(val)
+            }
+            return ret;
+        }
+        generateConstraintMatrix(A0){
+            let PHT,num_const;
+            let dim = jStat(A0).dimensions();
+            let vector0 =math.flatten(math.transpose(A0));
+            let vect = [];
+            let nzct = [];
+            vector0.forEach((d,i)=>{
+                if(d>=1){
+                    vect.push(d)
+                    nzct.push(i);
+                }
+            })
+            let nzt = nzct.length;
+            let nzcst =[];
+            let num_nzct = nzcst.length;
+            if(num_nzct===0){
+                PHT = jStat.identity(nzt);
+                num_const =0;
+            }else{
+
+            }
+            return {PHT,num_nzct,num_const}
+        }
+    }
+    $( document ).ready(function() {
+        // Copy to clipboard function
+        let clipboardCopy = document.getElementById("clipboardCopy");
+        clipboardCopy.addEventListener("click",copyToClipBoard, false);
+        function copyToClipBoard() {
+            let copyText = document.getElementById("sampleModel");
+            if (document.selection) {
+                let range = document.body.createTextRange();
+                range.moveToElementText(copyText);
+                range.select().createTextRange();
+                document.execCommand("copy");
+            } else if (window.getSelection) {
+                let range = document.createRange();
+                range.selectNode(copyText);
+                window.getSelection().addRange(range);
+                document.execCommand("copy");
+            }
+        }
+
+        // Init data container
+        let dataTable = new DataTablePrep();
+        // Init Gesca
+        let gesCa = new GESCA();
+        // Process File Upload
+        let uploader = document.getElementById("uploader");
+        uploader.addEventListener('change', fileUpload, false);
+        function fileUpload(event) {
+            let reader = new FileReader();
+            let file = this.files[0];
+            reader.readAsText(file);
+            reader.onprogress = function (_data) {
+                if (_data.lengthComputable) {
+                    let percent = Math.round((_data.loaded / _data.total) * 100);
+                    $("#progressPrep").css("width",percent+'%');
+                }
+
+            };
+            reader.onloadend = function () {
+                let contents = reader.result;
+                let data = d3.csv.parse(contents);
+                dataTable.init(data).populateData().display();
+            };
+        }
+
+
+        // Analyze the model
+        let btnAnalyzeModel = document.getElementById('btnAnalyzeModel');
+        btnAnalyzeModel.addEventListener('click', analyzeModel,false);
+        function analyzeModel() {
+            let textModel = $('#myModel').val().replace(/ /g,'');
+            if(dataTable.jsonData==null||textModel===''){
+                alert("Please upload your data or specify the model");
+            }else{
+                // params = z0, group_var, W00, C00, B00,
+                //                      loadtype = matrix(1,1,ncol(W00)), nbt = 100, itmax = 100,
+                // ceps = 0.00001, moption = 0, missingvalue = NULL
+                let result = dataTable.parseData(textModel).result;
+                let loadtype =[];
+                let cols = jStat(result.W00).dimensions().cols
+                for(let i=0;i<cols;i++){
+                    loadtype.push(1);
+                }
+                let params ={
+                    z0:result.data,
+                    group_var:null,
+                    W00:result.W00, //weight matrix
+                    C00:result.C00,//component matrix
+                    B00:result.B00,//latent matrix
+                    loadtype:loadtype,
+                    nbt:100, //number of bootstrap
+                    itmax:100, //max iteration
+                    ceps:0.00001, //min threshold value
+                    moption:0, //process missing values: 0-no missing, 1-listwise deletion, 2 - row wise deletion
+                    missingvalue:null
+                }
+                gesCa.init(params).modelAnalyzer();
+            }
+        }
+
+    });
+
+
+</script>
+</html>
